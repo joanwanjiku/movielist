@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content%}
+    <div class="container">
+        <div class="row">
+            <h1> {{ message }} </h1>
+            <div class="col-sm-12" style="background: url({{url}}{{result.backdrop_path}}); height: 40vh; background-repeat: no-repeat; background-size:cover">
+            </div>
+            <div class="col-sm-12">
+
+                <p>
+                    {{ result.overview }}
+                </p>
+                <small>{{result.vote_count}} | {{result.vote_average}}</small>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,7 @@
+{% macro displayMovieList(movie_list) %}
+    {% for movie in movie_list %}
+        <li> <a href="/movie/{{movie.id}}">{{movie.name}}</a> </li>
+    {%endfor%}
+{%endmacro%}
+
+
