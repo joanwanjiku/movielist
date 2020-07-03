@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                    <img src="http://image.tmdb.org/t/p/w780{{movie.backdrop_path}}" alt="">
+                    <h1>I don't understand</h1>
+            </div>
+            <div class="col-sm-5">
+                <h1>Neither do I</h1>
+                {{wtf.quick_form(review_form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

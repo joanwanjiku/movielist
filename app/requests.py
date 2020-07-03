@@ -1,12 +1,17 @@
-from app import app
 import urllib.request
 import json
-from .models.movie import Movie
+from .models import Movie
+from .main import main
 
 # get the apikey
-api_key = app.config['MOVIE_API_KEY']
+api_key = None
 # get the movie base url
-base_url = app.config['MOVIE_API_BASE_URL']
+base_url = None
+
+def configure_request(app):
+    global api_key,base_url
+    api_key = app.config['MOVIE_API_KEY']
+    base_url = app.config['MOVIE_API_BASE_URL']
 
 
 def get_movies(category):
@@ -61,6 +66,7 @@ def get_movie_by_id(movie_id):
     :return: a movie object
     """
     search_url = 'https://api.themoviedb.org/3/movie/%s?api_key=%s' %(movie_id, api_key)
+    print(search_url)
     with urllib.request.urlopen(search_url) as url:
         get_movie_data = url.read()
         get_movie_result = json.loads(get_movie_data)
@@ -72,7 +78,7 @@ def get_movie_by_id(movie_id):
         movie_average = get_movie_result.get('vote_average')
         movie_count = get_movie_result.get('vote_count')
 
-        movie_object = Movie(movie_id, movie_name, movie_overview, movie_backdrop, movie_average, movie_count)
+        movie_object = Movie(movie_idnum, movie_name, movie_overview, movie_backdrop, movie_average, movie_count)
 
     return movie_object
 
@@ -82,10 +88,7 @@ def get_image_url():
         get_urls = url.read()
         get_url_result = json.loads(get_urls)
 
-        base_url = get_url_result.get('images')
-
         url = get_url_result['images']['base_url'] + get_url_result['images']['backdrop_sizes'][1]
-    # print(url)
     return url
 
 

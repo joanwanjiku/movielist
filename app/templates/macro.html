@@ -1,7 +1,20 @@
 {% macro displayMovieList(movie_list) %}
     {% for movie in movie_list %}
-        <li> <a href="/movie/{{movie.id}}">{{movie.name}}</a> </li>
+            <img src="http://image.tmdb.org/t/p/w780{{movie.backdrop_path}}" alt="{{movie.name}}" class="img-responsive img-fluid" >
+
+            <a href="/movie/{{movie.id}}">{{movie.name}}</a>
+
+
     {%endfor%}
 {%endmacro%}
+
+{% macro displayReviews(review_list) %}
+    {% for review in review_list %}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+        <h2> {{ review.title}} </h2>
+        <p> {{ review.review | truncate(30) }}</p>
+    </div>
+    {% endfor %}
+{% endmacro %}
 
 
